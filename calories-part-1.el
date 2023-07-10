@@ -1,23 +1,16 @@
+(let ((bags 
+(with-temp-buffer
+  (progn (insert-file-contents "input" nil nil nil)
+	 (insert "((")
+	 (while (re-search-forward "^$" nil t)
+	   (replace-match ")(" nil nil))
+	 (end-of-buffer)
+	 (insert "))")
+	 (goto-char (point-min))
+	 (read (current-buffer))))))
+  (cl-reduce #'max
+  (mapcar (lambda (bag)
+	    (cl-reduce #'+ bag))
+	  bags)))
 
-(with-temp-buffer 
-  (insert-file-contents "input" t nil nil)
-  (goto-char (point-min))
-  (setq sum 0)
-  (setq count 1)
-  (setq max_elf_num 0)
-  (setq max_elf 0)
-  (while (not (eobp))
-    (let ((ln (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
-	  )
-      (forward-line 1)
-      (if (eq 0 (length ln))
-	  (progn (message ">> Elf %s has %s caloris" count sum)
-	  (when (> sum max_elf_num)
-	    (progn (setq max_elf_num sum)
-		   (setq max_elf count)))
 
-	  (setq count (1+ count))
-	  (setq sum 0))
-      (progn (setq sum (+ sum (string-to-number ln)))))
-    ))
-  (message "Elf %s has the max cals of %s" max_elf max_elf_num))
