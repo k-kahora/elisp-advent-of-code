@@ -8,9 +8,13 @@
 	 (insert "))")
 	 (goto-char (point-min))
 	 (read (current-buffer))))))
-  (cl-reduce #'max
+  (cl-reduce #'+ (seq-take
+  (sort 
   (mapcar (lambda (bag)
 	    (cl-reduce #'+ bag))
-	  bags)))
+	  bags) #'> ) 3)))
+
+
+
 
 
