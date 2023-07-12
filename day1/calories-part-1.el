@@ -7,12 +7,22 @@
 	 (end-of-buffer)
 	 (insert "))")
 	 (goto-char (point-min))
-	 (read (current-buffer))))))
+	 (read (current-buffer))
+   ))))
   (cl-reduce #'+ (seq-take
   (sort 
   (mapcar (lambda (bag)
 	    (cl-reduce #'+ bag))
 	  bags) #'> ) 3)))
+
+(let (
+      (bags
+(progn
+  (setq x '( (312 3210) (4321 31)))
+  (list x)
+  )))
+  (mapcar (lambda (item) (car item)) bags)
+  )
 
 
 
