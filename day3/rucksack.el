@@ -1,4 +1,4 @@
-(let ((sack (with-temp-buffer (progn
+(let* ((sack (with-temp-buffer (progn
   (insert-file-contents "input")
   (insert "(")
   (end-of-buffer)
@@ -12,4 +12,5 @@
 		   (second-half (substring item-str (/ (length item-str) 2) (length item-str))))
 	      (list first-half second-half)))
 	      sack))
+  
 
